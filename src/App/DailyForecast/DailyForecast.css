@@ -1,0 +1,16 @@
+.city-list {
+    display: flex;
+}
+.city-list li {
+    list-style: none;
+    text-transform: capitalize;
+    font-size: 30px;
+    color: rgb(155, 44, 44)
+}
+.city-list li:not(:last-child) {
+    margin-right: 30px;
+}
+.city-list li:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

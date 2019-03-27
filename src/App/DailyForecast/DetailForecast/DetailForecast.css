@@ -1,0 +1,57 @@
+.detail-forecast div p {
+    font-size: 18px;
+}
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+}
+.glyph {
+    font-family: 'Glyphter';
+    font-size: 25px;
+}
+.pressure {
+    color: #2D9ECF;
+}
+.humidity {
+    color: #046DCF;
+}
+.low-temp {
+    color: #1056CF;
+}
+.high-temp {
+    color: #CF4141;
+}
+.wind {
+    color: rgb(151, 151, 151);
+}
+.cloudiness {
+    color: rgb(104, 101, 101);
+}
+.city {
+    font-size: 50px;
+    margin-bottom: -10px;
+}
+.temperature {
+    font-size: 55px;
+}
+.weather-description {
+    margin-bottom: 0;
+}
+.bold {
+    font-weight: bold;
+    font-size: 20px;
+}
+.detail-forecast {
+    animation-name: zoom;
+    animation-duration: 1s;
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 1s;
+}
+@keyframes zoom {
+    from{transform: scale(0)}
+    to{transform: scale(1)}
+}
+@-webkit-keyframes zoom {
+    from{-webkit-transform: scale(0)}
+    to{-webkit-transform: scale(1)}
+}
