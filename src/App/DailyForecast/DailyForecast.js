@@ -44,7 +44,7 @@ class DailyForecast extends Component {
     }
 
     handlerKeyPress = async event => {
-        if (event.key === 'Enter') {
+        if (event.key === 'Enter' && this.state.value) {
             await this.fetchWeatherData(this.state.value)
             await this.getLastCities()
             await this.fetchWeeklyForecast()

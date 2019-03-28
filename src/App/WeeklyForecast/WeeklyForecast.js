@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import ForecastTable from './ForecastTable/ForecastTable'
 import './WeeklyForecast.css'
 
@@ -84,4 +85,14 @@ class WeeklyForecast extends Component {
         )
     }
 }
-export default WeeklyForecast
+
+const mapStateToProps = (state) => {
+    return {
+        weeklyForecastData: state.weeklyForecastData,
+        weatherData: state.cityWeatherData
+    }
+}
+
+export default connect(
+    mapStateToProps
+)(WeeklyForecast)
