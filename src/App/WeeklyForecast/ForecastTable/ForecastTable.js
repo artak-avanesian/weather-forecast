@@ -24,7 +24,7 @@ const ForecastTable = ({
                 <tbody>
                     {
                         weatherData.map((item, index) => (
-                            <tr key={index}>
+                            <tr key={index} className='tab-row'>
                                 <th>{getDayOfWeek(index)}
                                     <small>{getDate(date.getFullYear(), date.getDate() + index + 1, date.getMonth())}</small><br/>
                                     <small>{item.weather[0].description}</small>

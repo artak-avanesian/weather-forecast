@@ -8,3 +8,10 @@
 small, .table-glyph, .glyph3 {
     margin-left: 5px;
 }
+.tab-row:hover {
+    background-color: #2D9ECF;
+    color: white;
+    cursor: pointer;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+}
