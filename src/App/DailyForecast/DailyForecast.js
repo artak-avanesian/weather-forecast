@@ -11,8 +11,8 @@ class DailyForecast extends Component {
         value: '',
     }
 
-    async fetchWeatherData(url) {
-        const response = await fetch(url)
+    async fetchWeatherData(city) {
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`)
         const weatherData = await response.json()
 
         this.props.dispatchGetWeatherData(weatherData)
@@ -45,7 +45,7 @@ class DailyForecast extends Component {
 
     handlerKeyPress = async event => {
         if (event.key === 'Enter') {
-            await this.fetchWeatherData(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.value}&appid=${API_KEY}`)
+            await this.fetchWeatherData(this.state.value)
             await this.getLastCities()
             await this.fetchWeeklyForecast()
             this.setState({
@@ -58,7 +58,7 @@ class DailyForecast extends Component {
         const currentCity = array.filter((item, i) => {
             return i === index
         })
-        await this.fetchWeatherData(`http://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${API_KEY}`)
+        await this.fetchWeatherData(currentCity)
         await this.fetchWeeklyForecast()
     }
 
