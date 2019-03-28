@@ -55,10 +55,10 @@ class DailyForecast extends Component {
     }
 
     showCityForecast = async (array, index) => {
-        const value = array.filter((item, i) => {
+        const currentCity = array.filter((item, i) => {
             return i === index
         })
-        await this.fetchWeatherData(`http://api.openweathermap.org/data/2.5/weather?q=${value}&appid=${API_KEY}`)
+        await this.fetchWeatherData(`http://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${API_KEY}`)
         await this.fetchWeeklyForecast()
     }
 
