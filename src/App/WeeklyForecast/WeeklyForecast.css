@@ -1,0 +1,35 @@
+.weekly-forecast {
+    position: relative;
+}
+.weekly-forecast p {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+.glyph2 {
+    font-family: 'Glyphter2';
+    font-size: 30px;
+    color: #4A66C6;
+}
+.glyph2:hover{
+    color: #007BFC;
+}
+.back:hover, .weekly-forecast a:hover {
+    text-decoration: none;
+}
+.back>.glyph2 {
+    font-size: 75px;
+    position: relative;
+    left: -485px;
+    top: 50px;
+}
+.weekly-forecast a {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    line-height: 0px;
+}
+.back-label {
+    line-height: 30px;
+    color: #4A66C6
+}

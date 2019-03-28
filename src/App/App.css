@@ -19,3 +19,15 @@ body {
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+    font-family: 'Glyphter2';
+    src: url('./../style/fonts/Glyphter2.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Glyphter3';
+    src: url('./../style/fonts/Glyphter3.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

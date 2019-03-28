@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import DetailForecast from './DetailForecast/DetailForecast'
 import { connect } from 'react-redux'
-import { keys } from 'lodash'
 import './DailyForecast.css'
 
 const API_KEY = '3202afc9748ff0709631c6435eeefc3a'
@@ -10,7 +9,7 @@ class DailyForecast extends Component {
 
     state = {
         value: '',
-        cities: {}
+        cities: [],
     }
 
     async fetchWeatherData(url) {
@@ -20,14 +19,29 @@ class DailyForecast extends Component {
         this.props.dispatchGetWeatherData(weatherData)
     }
 
+    async fetchWeeklyForecast() {
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?id=${this.props.weatherData.id}&appid=${API_KEY}`)
+        const weeklyForecastData = await response.json()
+    
+        this.props.dispatchGetWeeklyForecastData(weeklyForecastData)
+    }
+
     getLastCities = () => {
-        const city = this.state.value
-        this.setState(prevState => ({
-            cities: {
-                ...prevState.cities,
-                [city]: city
+        this.setState(prevState => {
+            if(this.props.weatherData.name && (this.props.weatherData.name.toLowerCase().indexOf(prevState.value.toLowerCase()) !== -1)) {
+                if (prevState.cities.indexOf(prevState.value) === -1) {
+                    prevState.cities.push(prevState.value)
+                }
             }
-        }))
+            return prevState.cities
+        })
+    }
+
+    deleteCity = () => {
+        this.setState(prevState => {
+            prevState.cities.shift()
+            return prevState.cities
+        })
     }
 
     valueChangeHandler = event => {
@@ -36,30 +50,32 @@ class DailyForecast extends Component {
         })
     }
 
-    handlerKeyPress = event => {
+    handlerKeyPress = async event => {
         if (event.key === 'Enter') {
-            this.fetchWeatherData(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.value}&appid=${API_KEY}`)
-            this.getLastCities()
+            await this.fetchWeatherData(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.value}&appid=${API_KEY}`)
+            await this.getLastCities()
+            await this.fetchWeeklyForecast()
+            this.setState({
+                value: ''
+            })
         }
     }
 
-    showCityForecast = (array, index) => {
+    showCityForecast = async (array, index) => {
         const value = array.filter((item, i) => {
             return i === index
         })
-        this.fetchWeatherData(`http://api.openweathermap.org/data/2.5/weather?q=${value}&appid=${API_KEY}`)
+        await this.fetchWeatherData(`http://api.openweathermap.org/data/2.5/weather?q=${value}&appid=${API_KEY}`)
+        await this.fetchWeeklyForecast()
     }
-    
-    cities = keys(this.state.cities)
 
     render() {
         const {
             weatherData
         } = this.props
-        let cities = keys(this.state.cities)
-        console.log(cities)
+        let cities = this.state.cities
         if (cities.length > 5) {
-            cities.shift()
+            this.deleteCity()
         }
         return (
             <div>
@@ -76,7 +92,7 @@ class DailyForecast extends Component {
                 <ul className='city-list'>
                     {
                         cities.map((city, index) => (
-                            <li key={index} onClick={() => this.showCityForecast(cities, index)}>            {city.toLowerCase()}
+                            <li key={city} onClick={() => this.showCityForecast(cities, index)}>            {city.toLowerCase()} 
                             </li>
                         ))
                     }
@@ -99,6 +115,10 @@ const mapDispatchToProps = dispatch => ({
     dispatchGetWeatherData: data => dispatch({
         type: "GET_WEATHER_DATA",
         weatherData: data
+    }),
+    dispatchGetWeeklyForecastData: data => dispatch({
+        type: "GET_WEEKLY_FORECAST_DATA",
+        weeklyForecastData: data
     })
 })
 

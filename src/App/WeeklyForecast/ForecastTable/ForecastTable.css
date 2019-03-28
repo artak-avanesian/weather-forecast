@@ -1,0 +1,10 @@
+.table-glyph {
+    font-family: 'Glyphter';
+}
+.glyph3 {
+    font-family: "Glyphter3";
+    color: white;
+}
+small, .table-glyph, .glyph3 {
+    margin-left: 5px;
+}

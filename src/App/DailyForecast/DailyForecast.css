@@ -5,7 +5,9 @@
     list-style: none;
     text-transform: capitalize;
     font-size: 30px;
-    color: rgb(155, 44, 44)
+    color: rgb(155, 44, 44);
+    animation-name: show;
+    animation-duration: 2s;
 }
 .city-list li:not(:last-child) {
     margin-right: 30px;
@@ -13,4 +15,8 @@
 .city-list li:hover {
     cursor: pointer;
     text-decoration: underline;
+}
+@keyframes show {
+    from{opacity: 0}
+    to{opacity: 1}
 }

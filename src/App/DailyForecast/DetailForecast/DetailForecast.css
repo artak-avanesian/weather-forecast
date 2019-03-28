@@ -47,6 +47,9 @@
     -webkit-animation-name: zoom;
     -webkit-animation-duration: 1s;
 }
+.show-weekly-forecast {
+    font-size: 30px;
+}
 @keyframes zoom {
     from{transform: scale(0)}
     to{transform: scale(1)}
