@@ -9,7 +9,6 @@ class DailyForecast extends Component {
 
     state = {
         value: '',
-        cities: [],
     }
 
     async fetchWeatherData(url) {
@@ -27,21 +26,15 @@ class DailyForecast extends Component {
     }
 
     getLastCities = () => {
-        this.setState(prevState => {
-            if(this.props.weatherData.name && (this.props.weatherData.name.toLowerCase().indexOf(prevState.value.toLowerCase()) !== -1)) {
-                if (prevState.cities.indexOf(prevState.value) === -1) {
-                    prevState.cities.push(prevState.value)
-                }
+        if(this.props.weatherData.name && (this.props.weatherData.name.toLowerCase().indexOf(this.state.value.toLowerCase()) !== -1)) {
+            if (this.props.cities.indexOf(this.state.value) === -1) {
+                this.props.dispatchAddCity(this.state.value)
             }
-            return prevState.cities
-        })
+        }
     }
 
     deleteCity = () => {
-        this.setState(prevState => {
-            prevState.cities.shift()
-            return prevState.cities
-        })
+        this.props.dispatchDeleteCity()
     }
 
     valueChangeHandler = event => {
@@ -71,9 +64,9 @@ class DailyForecast extends Component {
 
     render() {
         const {
-            weatherData
+            weatherData,
+            cities
         } = this.props
-        let cities = this.state.cities
         if (cities.length > 5) {
             this.deleteCity()
         }
@@ -107,7 +100,8 @@ class DailyForecast extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        weatherData: state.cityWeatherData
+        weatherData: state.cityWeatherData,
+        cities: state.cities
     }
 }
 
@@ -119,10 +113,17 @@ const mapDispatchToProps = dispatch => ({
     dispatchGetWeeklyForecastData: data => dispatch({
         type: "GET_WEEKLY_FORECAST_DATA",
         weeklyForecastData: data
-    })
+    }),
+    dispatchAddCity: city => dispatch({
+        type: "ADD_CITY",
+        city
+    }),
+    dispatchDeleteCity: () => dispatch({
+        type: "DELETE_CITY"
+    }),
 })
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(DailyForecast);
+)(DailyForecast)

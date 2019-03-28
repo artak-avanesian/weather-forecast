@@ -48,7 +48,7 @@
     -webkit-animation-duration: 1s;
 }
 .show-weekly-forecast {
-    font-size: 30px;
+    font-size: 25px;
 }
 @keyframes zoom {
     from{transform: scale(0)}
