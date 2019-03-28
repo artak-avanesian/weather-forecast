@@ -75,7 +75,7 @@ class DailyForecast extends Component {
                 <div className="input-group mt-3 mb-3">
                     <input
                         className="form-control"
-                        type='search'
+                        type='text'
                         placeholder='City name'
                         value={this.state.value}
                         onChange={this.valueChangeHandler}
