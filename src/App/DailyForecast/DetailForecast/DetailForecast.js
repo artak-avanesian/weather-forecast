@@ -53,16 +53,16 @@ const DetailForecast = ({
                     {weatherData.clouds.all} %
                 </p>
             </div>
-            <Link to='/weekly-forecast' className='show-weekly-forecast'>Show weekly forecast</Link>
+            <Link to={`/weekly-forecast`} className='show-weekly-forecast'>Show weekly forecast</Link>
         </div>
     )
-}
+};
 
 const mapStateToProps = (state) => {
     return {
         weatherData: state.cityWeatherData
     }
-}
+};
 
 export default connect(
     mapStateToProps

@@ -7,7 +7,7 @@ const ForecastTable = ({
     getDate,
     getPrecipitationData
 }) => {
-    const date = new Date()
+    const date = new Date();
     return (
         <table className='table'>
                 <thead>
@@ -27,20 +27,20 @@ const ForecastTable = ({
                             <tr key={index} className='tab-row'>
                                 <th>{getDayOfWeek(index)}
                                     <small>{getDate(date.getFullYear(), date.getDate() + index + 1, date.getMonth())}</small><br/>
-                                    <small>{item.weather[0].description}</small>
+                                    <small>{item['weather'][0]['description']}</small>
                                 </th>
-                                <td>{Math.round(item.main.temp - 273.15)}&#176;</td>
-                                <td>{Math.round(item.main.pressure)} mb</td>
-                                <td>{item.main.humidity} %</td>
-                                <td>{item.wind.speed} km/h</td>
+                                <td>{Math.round(item['main']['temp'] - 273.15)}&#176;</td>
+                                <td>{Math.round(item['main']['pressure'])} mb</td>
+                                <td>{item['main']['humidity']} %</td>
+                                <td>{item['wind']['speed']} km/h</td>
                                 <td>{getPrecipitationData(item)} cm</td>
-                                <td>{item.clouds.all} %</td>
+                                <td>{item['clouds']['all']} %</td>
                             </tr>
                         ))
                     }
                 </tbody>
             </table>
     )
-}
+};
 
 export default ForecastTable
