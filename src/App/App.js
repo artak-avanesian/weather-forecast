@@ -1,8 +1,8 @@
-import React from 'react'
-import DailyForecast from './DailyForecast/DailyForecast'
-import { Route } from 'react-router-dom'
-import WeeklyForecast from './WeeklyForecast/WeeklyForecast'
-import './App.css'
+import React from 'react';
+import { Route } from 'react-router-dom';
+import DailyForecast from './DailyForecast/DailyForecast';
+import WeeklyForecast from './WeeklyForecast/WeeklyForecast';
+import './App.css';
 
 const  App = () => {
     return (

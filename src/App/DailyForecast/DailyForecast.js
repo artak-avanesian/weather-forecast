@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import DetailForecast from './DetailForecast/DetailForecast'
-import { connect } from 'react-redux'
-import './DailyForecast.css'
+import { connect } from 'react-redux';
+import DetailForecast from './DetailForecast/DetailForecast';
+import './DailyForecast.css';
 
 const API_KEY = '3202afc9748ff0709631c6435eeefc3a';
 

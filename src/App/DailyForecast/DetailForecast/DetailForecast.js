@@ -1,7 +1,7 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import './DetailForecast.css'
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import './DetailForecast.css';
 
 const DetailForecast = ({
     weatherData,
@@ -58,11 +58,9 @@ const DetailForecast = ({
     )
 };
 
-const mapStateToProps = (state) => {
-    return {
-        weatherData: state.cityWeatherData
-    }
-};
+const mapStateToProps = state => ({
+    weatherData: state.cityWeatherData
+});
 
 export default connect(
     mapStateToProps

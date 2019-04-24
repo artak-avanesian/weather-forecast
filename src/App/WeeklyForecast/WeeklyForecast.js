@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import ForecastTable from './ForecastTable/ForecastTable'
-import {withRouter} from 'react-router-dom'
-import './WeeklyForecast.css'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import Loader from "./Loader/Loader";
+import ForecastTable from './ForecastTable/ForecastTable';
+import './WeeklyForecast.css';
 
 const API_KEY = '3202afc9748ff0709631c6435eeefc3a';
 
@@ -15,49 +15,28 @@ class WeeklyForecast extends Component {
         const week = await fetch(`https://api.openweathermap.org/data/2.5/forecast?id=${id}&appid=${API_KEY}`)
             .then(resp => resp.json())
             .catch(error => console.log(error.name));
-        this.props.dispatchGetWeeklyForecastData(week)
+        this.props.getWeeklyForecastData(week)
+    };
+
+    getWeekdayData = (num) => {
+        const date = new Date();
+        date.setDate(date.getDate() + num + 1);
+        return new Date(date)
     };
 
     getDayOfWeek = (num) => {
-        const date = new Date();
-        let day;
-        for (let i = 0; i < 7; i++) {
-            if (i === num) {
-                day = date.getDay() + i + 1;
-            }
-        }
-        if (day > 7) day = day - 7;
-
-        if(day === 1) return 'Monday';
-        else if(day === 2) return 'Tuesday';
-        else if(day === 3) return 'Wednesday';
-        else if(day === 4) return 'Thursday';
-        else if(day === 5) return 'Friday';
-        else if(day === 6) return 'Saturday';
-        else return 'Sunday'
+        let options = {
+            weekday: 'long',
+        };
+        return this.getWeekdayData(num).toLocaleString('en-US', options);
     };
 
-    getDate = (year, day, month) => {
-        const date = new Date(year, month, day);
-        const mon = date.getMonth() + 1;
-        let monthDay = date.getDate();
-        let monthName;
-        for (let i = 1; i < 13; i++) {
-            if (mon === 1) monthName = 'JAN';
-            else if (mon === 2) monthName = 'FEB';
-            else if (mon === 3) monthName = 'MAR';
-            else if (mon === 4) monthName = 'APR';
-            else if (mon === 5) monthName = 'MAY';
-            else if (mon === 6) monthName = 'JUN';
-            else if (mon === 7) monthName = 'JUL';
-            else if (mon === 8) monthName = 'AUG';
-            else if (mon === 9) monthName = 'SEP';
-            else if (mon === 10) monthName = 'OCT';
-            else if (mon === 11) monthName = 'NOV';
-            else monthName = 'DEC'
-        }
-        if (monthDay < 10) monthDay = `0${monthDay}`;
-        return `${monthName} ${monthDay}`
+    getDate = (num) => {
+        let options = {
+            month: 'short',
+            day: 'numeric'
+        };
+        return this.getWeekdayData(num).toLocaleString('en-US', options).toUpperCase()
     };
 
     getPrecipitationData = (obj) => {
@@ -107,7 +86,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch =>  ( {
-    dispatchGetWeeklyForecastData: data => dispatch({
+    getWeeklyForecastData: data => dispatch({
         type: "GET_WEEKLY_FORECAST_DATA",
         weeklyForecastData: data
     }),
